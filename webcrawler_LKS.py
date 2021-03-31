@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 import requests
 import re
 from os import system
-
+nP = 1
 class Tela:
     def __init__(self):
         layout = [
@@ -18,6 +18,7 @@ class Tela:
         self.janela = sg.Window("webC").layout(layout)
 
     def Iniciar(self):
+        global nP
         while True:
         
             self.event, self.values = self.janela.Read()
@@ -39,11 +40,12 @@ class Tela:
             if mostrar_lks == True:
                 links_pg = re.findall(r'(?<=href=["\'])https?://.+?(?=["\'])', pagina_fld, re.IGNORECASE)
                 system('cls')
-                for i in range(20):
-                    print('\n')
+                print('======================================================================')
+                print(f'============================ {nP}° pesquisa ================================')
                 for link in links_pg:
                     print(f'\n{link}')
-                    
+                print('======================================================================')
+                nP += 1
                     
                     
 
