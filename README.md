@@ -6,9 +6,9 @@ Modo de uso:
 1° antes de iniciar o programa em python, você deve ter o Python3 e vai ser necessario ter algumas bibliotecas cujo sera feito as seguintes importações:
 
 ==========================================
-import PySimpleGUI as sg
-import requests
-import re
+import PySimpleGUI as sg --
+import requests --
+import re --
 from os import system
 
 ========================================
