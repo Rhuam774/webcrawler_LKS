@@ -7,8 +7,11 @@ Modo de uso:
 
 ===============
 import PySimpleGUI as sg --
+
 import requests --
+
 import re --
+
 from os import system
 
 ===============
