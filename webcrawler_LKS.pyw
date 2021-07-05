@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 import requests
 import re
 from os import system
+##########################################
 nP = 1
 class Tela:
     def __init__(self):
@@ -35,13 +36,14 @@ class Tela:
             if mostrar_lks == True:
                 links_pg = re.findall(r'(?<=href=["\'])https?://.+?(?=["\'])', pagina_fld, re.IGNORECASE)
                 system('cls')
-                print('\n======================================================================')
+                print('\n'+'~' * 70)
                 print(f'============================ {nP}° pesquisa ================================\n')
-                print(f'Resultados de:   {url}\n----------------------------------------------------------------------------------------------------------\n')
+                Rps = (f' Resultados de {url}:\n')
+                print(Rps +'/'+'T' * len(Rps) + '\ \n')
 
                 for link in links_pg:
                     print(f'\n{link}')
-                print('======================================================================\n')
+                print('=' * 70 + '\n')
                 nP += 1
 #===========================================================================================================
 tela = Tela()
