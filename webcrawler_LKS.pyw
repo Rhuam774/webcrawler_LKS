@@ -20,7 +20,7 @@ class Tela:
             [sg.T("URL"), sg.Input('http://www.',key="URL")],
             [sg.Checkbox("mostrar toda a pagina", key="mostrar_pg")],
             [sg.Checkbox("mostrar todos os links da pagina", key="mostrar_lks")],
-            [sg.Checkbox('-'*23+"\n**ir para o site**\n"+'-'*23, text_color=('lightblue'), key="ir_site",),sg.T('<-- somente com o chrome instalado!', text_color=('#FFD700'))], 
+            [sg.Checkbox('-'*23+"\n**ir para o site**\n"+'-'*23, text_color=('lightblue'), key="ir_site",), sg.Checkbox('manter navegadores abertos.',key="nvd_A", text_color=('lightblue'))],
             
             [sg.Output(size=(80, 15))],
             [sg.Button('comecar')]
@@ -39,6 +39,7 @@ class Tela:
             mostrar_pg = self.values["mostrar_pg"]
             ir_site = self.values["ir_site"]
             url = self.values["URL"]
+            nvg_A = self.values["nvd_A"]
 #=========================================================================================================
             try:
                 pagina = requests.get(url)
@@ -53,6 +54,13 @@ class Tela:
                     print(f"Erro: {erro}\n Tente colocar uma url valida usando https://")
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!            
             if ir_site == True:
+                if nvg_A == False:
+                    try:
+                        navegador.quit()
+                        navegador.quit()
+                        navegador.quit()
+                    except Exception as erro:
+                        print('\n')
                 try:
                     navegador = webdriver.Chrome()
                     navegador.get(url)
