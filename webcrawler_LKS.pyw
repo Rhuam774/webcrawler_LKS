@@ -1,8 +1,18 @@
-import PySimpleGUI as sg
-import requests
-import re
+#RHUAM PFC
+#webcrawler_LINKS                         #--/--/---
+#------------------------------------------------------------
+
 from os import system
+from time import sleep
+import re
+from tkinter import Label, colorchooser
+import PySimpleGUI as sg
+from PySimpleGUI.PySimpleGUI import COLOR_SCHEME, COLOR_SYSTEM_DEFAULT, CUSTOM_TITLEBAR_TEXT_COLOR, theme_text_color, theme_text_element_background_color
+import requests
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 ##########################################
+
 nP = 1
 class Tela:
     def __init__(self):
@@ -10,6 +20,8 @@ class Tela:
             [sg.T("URL"), sg.Input('http://www.',key="URL")],
             [sg.Checkbox("mostrar toda a pagina", key="mostrar_pg")],
             [sg.Checkbox("mostrar todos os links da pagina", key="mostrar_lks")],
+            [sg.Checkbox('-'*23+"\n**ir para o site**\n"+'-'*23, text_color=('lightblue'), key="ir_site",),sg.T('<-- somente com o chrome instalado!', text_color=('#FFD700'))], 
+            
             [sg.Output(size=(80, 15))],
             [sg.Button('comecar')]
         ]
@@ -25,26 +37,43 @@ class Tela:
                 break
             mostrar_lks = self.values["mostrar_lks"]
             mostrar_pg = self.values["mostrar_pg"]
+            ir_site = self.values["ir_site"]
             url = self.values["URL"]
 #=========================================================================================================
-            pagina = requests.get(url)
-            pagina_fld = pagina.text
+            try:
+                pagina = requests.get(url)
+                pagina_fld = pagina.text
+            except Exception as erro:
+                print(f"Erro: {erro}\n Tente colocar uma url valida usando https://")
 
             if mostrar_pg == True:
-                print(f"{pagina_fld} ")
-
+                try:   
+                    print(f"{pagina_fld} ")
+                except Exception as erro:
+                    print(f"Erro: {erro}\n Tente colocar uma url valida usando https://")
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!            
+            if ir_site == True:
+                try:
+                    navegador = webdriver.Chrome()
+                    navegador.get(url)
+                except Exception as erro:
+                    print(f"Erro: {erro}\n Tente colocar uma url valida usando https://")
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             if mostrar_lks == True:
-                links_pg = re.findall(r'(?<=href=["\'])https?://.+?(?=["\'])', pagina_fld, re.IGNORECASE)
-                system('cls')
-                print('\n'+'~' * 70)
-                print(f'============================ {nP}° pesquisa ================================\n')
-                Rps = (f' Resultados de {url}:\n')
-                print(Rps +'/'+'T' * len(Rps) + '\ \n')
+                try:
+                    links_pg = re.findall(r'(?<=href=["\'])https?://.+?(?=["\'])', pagina_fld, re.IGNORECASE)
+                    system('cls')
+                    print('\n'+'~' * 70)
+                    print(f'============================ {nP}° pesquisa ================================\n')
+                    Rps = (f' Resultados de {url}:\n')
+                    print(Rps +'/'+'T' * len(Rps) + '\ \n')
 
-                for link in links_pg:
-                    print(f'\n{link}')
-                print('=' * 70 + '\n')
-                nP += 1
+                    for link in links_pg:
+                        print(f'\n{link}')
+                    print('=' * 70 + '\n')
+                    nP += 1
+                except Exception as erro:
+                    print(f"Erro: {erro}\n Tente colocar uma url valida usando https://")
 #===========================================================================================================
 tela = Tela()
 tela.Iniciar()
