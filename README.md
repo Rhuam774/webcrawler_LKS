@@ -7,24 +7,13 @@ Antes de iniciar o programa em python, você deve ter o Python3 e vai ser necess
 
 ===============
 
-from os import system
+re
 
-from time import sleep
+PySimpleGUI 
 
-import re
+requests
 
-from tkinter import Label, colorchooser
-
-import PySimpleGUI as sg
-
-from PySimpleGUI.PySimpleGUI import COLOR_SCHEME, COLOR_SYSTEM_DEFAULT, CUSTOM_TITLEBAR_TEXT_COLOR, theme_text_color, theme_text_element_background_color
-
-import requests
-
-from selenium import webdriver
-
-from selenium.webdriver.common.keys import Keys
-
+selenium 
 
 ===============
 
